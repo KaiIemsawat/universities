@@ -1,12 +1,15 @@
 package com.mvc.university.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -73,15 +76,25 @@ public class University {
 			@NotNull(message = "Enrollment field can't be empty") @Min(value = 1, message = "Number of enrollment need to be at leaste 1") Integer enrollment,
 			@NotNull(message = "Must input if the university offers online course or not") Boolean isOnline,
 			@NotNull(message = "Must input if the university offers in-person course or not") Boolean isInPerson,
-			@NotNull(message = "Years of founded field can't be empty") @Min(value = 1, message = "Years of founded need to be at leaste 1") Integer yearFounded) {
+			@NotNull(message = "Years of founded field can't be empty") @Min(value = 1, message = "Years of founded need to be at leaste 1") Integer yearFounded,
+			List<Hall> halls) {
 		this.city = city;
 		this.name = name;
 		this.enrollment = enrollment;
 		this.isOnline = isOnline;
 		this.isInPerson = isInPerson;
 		this.yearFounded = yearFounded;
+		this.halls = halls;
 	}
 
+
+
+//	Set up on 'One2Many' side
+	@OneToMany(mappedBy="university", fetch=FetchType.LAZY)
+	private List<Hall> halls;
+
+	
+//	Getters and Setters
 	public Long getId() {
 		return id;
 	}
@@ -153,6 +166,18 @@ public class University {
 //	public void setUpdateAt(Date updateAt) {
 //		this.updateAt = updateAt;
 //	}
+
+	public List<Hall> getHalls() {
+		return halls;
+	}
+
+	public void setHalls(List<Hall> halls) {
+		this.halls = halls;
+	}
+	
+	
+
+	
 
 	
 }

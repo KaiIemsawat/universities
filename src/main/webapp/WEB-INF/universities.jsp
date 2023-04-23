@@ -34,10 +34,13 @@
 				<c:forEach var="u" items="${universities}"> <!-- items="${itemsName}" <-- match with model.addAttribute("itemsName") -->
 					<tr>
 						<td><c:out value="${u.id}"/></td>
-						<td><a href="/universities/${u.id}"><c:out value="${u.name}"/></a></td>
+						<td><c:out value="${u.name}"/></td>
 						<td><c:out value="${u.city}"/></td>
-						<td><a href="/universities/${u.id}/edit" class="btn btn-secondary">Edit</a></td>
-						<td><a href="/universities/${u.id}/delete" class="btn btn-danger">Delete</a></td>
+						<td>
+							<a href="/universities/${u.id}" class="btn btn-primary">View</a>
+							<a href="/universities/${u.id}/edit" class="btn btn-secondary">Edit</a>
+							<a href="/universities/${u.id}/delete" class="btn btn-danger">Delete</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
