@@ -27,8 +27,9 @@ public class HallControllser {
 	
 //	All halls page
 	@GetMapping("/halls")
-	public String getAllHallsPage() {
-		return "";
+	public String getAllHallsPage(Model model) {
+		model.addAttribute("halls", hServ.getAllHalls());
+		return "hall";
 	}
 	
 //	Create new hall page
@@ -43,14 +44,22 @@ public class HallControllser {
 	
 //	View the hall page
 	@GetMapping("/halls/{id}")
-	public String getAllHallsPage(@PathVariable Long id) {
-		return "";
+	public String getAllHallsPage(
+			@PathVariable Long id
+			, Model model
+			) {
+		model.addAttribute("thisHall", hServ.getTheHall(id));
+		return "viewHall";
 	}
 	
 //	Edit the hall page
 	@GetMapping("/halls/{id}/edit")
-	public String editTheHallPage(@PathVariable Long id) {
-		return "";
+	public String editTheHallPage(@PathVariable Long id
+			, Model model
+			) {
+		model.addAttribute("editHall", hServ.getTheHall(id));
+		model.addAttribute("universities", uServ.getAllUniversities()); // <-- for drop down menu
+		return "editHall";
 	}
 	
 //	Add a hall into DB
@@ -71,13 +80,24 @@ public class HallControllser {
 	
 //	Edit the hall in DB
 	@PostMapping("/halls/{id}/edit")
-	public String editAHall(@PathVariable Long id) {
-		return "redirect:/halls";
+	public String editTheHall(@PathVariable Long id
+			, @Valid @ModelAttribute("editHall") Hall hall
+			, BindingResult res
+			, Model model
+			) {
+		if(res.hasErrors()) { // <-- if validation fail
+			model.addAttribute("universities", uServ.getAllUniversities());
+			return "editHall";
+		}
+//		If validation succeed, save it!!
+		hServ.addOrUpdateHall(hall);
+		return "redirect:/halls/" + id;
 	}
 	
 //	Route to delete a hall from DB
 	@RequestMapping(value="/halls/{id}/delete", method={RequestMethod.GET, RequestMethod.DELETE})
 	public String deleteAHallFromDB(@PathVariable Long id) {
+		hServ.deleteHallById(id);
 		return "redirect:/halls";
 	}
 }

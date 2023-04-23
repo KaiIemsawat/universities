@@ -14,7 +14,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>About ${thisUniversity.name}</title>
+	<title>About ${thisHall.hallName}</title>
 	<!-- Bootstrap Link -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
 </head>
@@ -24,25 +24,18 @@
 			<a class="navbar-brand" href="/">University Directory</a>
 			<ul class="nav nav-pills">
 				<li class="nav-item">
-					<a class="nav-link" href="/universities">All Universities</a>
+					<a class="nav-link" href="/halls">All Halls</a>
 				</li>
 			</ul>
 		</div>
 	</nav>
 	<div class="container-fluid">
-		<!-- <a href="/universities" class="btn btn-primary">All universities</a> -->
-		<h1>About ${thisUniversity.name}</h1> <!-- ${thisValue} <-- matched with viewUniversity() -> 'model.addAttribute("thisUniversity", uServ.getUniversityById(id));'-->
-		<p>City : ${thisUniversity.city}</p>
-		<p>Offer Online Courses : ${thisUniversity.isOnline}</p>
-		<p>Offer In-Person Courses : ${thisUniversity.isInPerson}</p>
-		<p>Year Established : ${thisUniversity.yearFounded}</p>
-		<p>List of Halls : </p>
-		<ul>
-			<c:forEach var="h" items="${thisUniversity.halls}">
-				<li>${h.hallName}</li>
-			</c:forEach>
-		</ul>
+		<!-- <a href="/halls" class="btn btn-primary">All universities</a> -->
+		<h1>About ${thisHall.hallName}</h1> <!-- ${thisValue} <-- matched with viewUniversity()-->
+		<p>Located at : ${thisHall.university.name}</p>
+		<p>Is a residential hall : ${thisHall.isResidential}</p>
+		<p>Floors : ${thisHall.floors}</p>
+		<p>Has lecture rooms : ${thisHall.hasLectureRoom}</p>
 	</div>
-
 </body>
-</html> 
+</html>

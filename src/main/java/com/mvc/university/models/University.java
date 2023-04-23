@@ -3,6 +3,7 @@ package com.mvc.university.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -90,6 +91,7 @@ public class University {
 
 
 //	Set up on 'One2Many' side
+//	@OneToMany(mappedBy="university", fetch=FetchType.LAZY, cascade=CascadeType.ALL) // careful with cascade
 	@OneToMany(mappedBy="university", fetch=FetchType.LAZY)
 	private List<Hall> halls;
 

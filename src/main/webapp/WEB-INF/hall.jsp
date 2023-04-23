@@ -14,16 +14,16 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>All Universities Page</title>
+	<title>Halls</title>
 	<!-- Bootstrap Link -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
 </head>
 <body>
 	<div class="container-fluid">
-		<h2>University Directory</h2>
+		<a href="/universities">University Directory</a>
 		<ul class="nav nav-pills">
 			<li class="nav-item">
-				<a class="nav-link" href="/halls">All Halls</a>
+				<a class="nav-link" href="/universities">All universities</a>
 			</li>
 		</ul>
 	</div>
@@ -33,29 +33,27 @@
 			<thead>
 				<tr>
 					<th>ID</th>
-					<th>University Name</th>
-					<th>Number of halls</th>
-					<th>City</th>
+					<th>Hall Name</th>
+					<th>University</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="u" items="${universities}"> <!-- items="${itemsName}" <-- match with model.addAttribute("itemsName") -->
+				<c:forEach var="h" items="${halls}"> <!-- items="${halls}" <-- match with model.addAttribute("halls", hServ.getAllHalls()); in getAllHallsPage() -->
 					<tr>
-						<td><c:out value="${u.id}"/></td>
-						<td><c:out value="${u.name}"/></td>
-						<td><c:out value="${u.halls.size()}"/></td>
-						<td><c:out value="${u.city}"/></td>
+						<td><c:out value="${h.id}"/></td>
+						<td><c:out value="${h.hallName}"/></td>
+						<td><c:out value="${h.university.name}"/></td>
 						<td>
-							<a href="/universities/${u.id}" class="btn btn-primary">View</a>
-							<a href="/universities/${u.id}/edit" class="btn btn-secondary">Edit</a>
-							<a href="/universities/${u.id}/delete" class="btn btn-danger">Delete</a>
+							<a href="/halls/${h.id}" class="btn btn-primary">View</a>
+							<a href="/halls/${h.id}/edit" class="btn btn-secondary">Edit</a>
+							<a href="/halls/${h.id}/delete" class="btn btn-danger">Delete</a>
 						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		<p><a href="/universities/new" class="btn btn-primary">Add a university</a></p>
+		<p><a href="/halls/new" class="btn btn-primary">Add a hall</a></p>
 	
 	</div>
 </body>
